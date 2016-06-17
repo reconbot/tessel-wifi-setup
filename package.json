@@ -1,6 +1,6 @@
 {
   "name": "tessel-wifi-setup",
-  "description": "",
+  "description": "A Tessel service that serves a web app for users to connect Tessel to a wifi network.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
