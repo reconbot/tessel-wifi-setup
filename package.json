@@ -1,12 +1,19 @@
 {
   "name": "tessel-wifi-setup",
-  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HipsterBrown/tessel-wifi-setup.git"
+  },
+  "devDependencies": {
+    "semantic-release": "^4.3.5"
+  }
 }
