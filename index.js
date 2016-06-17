@@ -7,7 +7,7 @@ var path = require('path')
 var server = http.createServer((request, response) => {
   switch (request.url) {
     case '/':
-      fs.readFile(path.join(__dirname, 'index.html'), (error, content) => {
+      fs.readFile(path.join(__dirname, 'public', 'index.html'), (error, content) => {
         if (error) {
           throw error
         }
@@ -24,7 +24,7 @@ var server = http.createServer((request, response) => {
         request.on('data', (chunk) => { requestData += chunk.toString() })
 
         request.on('end', () => {
-          fs.readFile(path.join(__dirname, 'form-success.html'), (error, content) => {
+          fs.readFile(path.join(__dirname, 'public', 'form-success.html'), (error, content) => {
             if (error) {
               throw error
             }
@@ -57,7 +57,7 @@ console.log('Server running at %d', process.argv[2] || 8080)
 // response functions
 
 function handle404 (response) {
-  fs.readFile(path.join(__dirname, '404.html'), (error, content) => {
+  fs.readFile(path.join(__dirname, 'public', '404.html'), (error, content) => {
     if (error) {
       console.log(error)
       content = error.toString()
