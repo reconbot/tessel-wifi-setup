@@ -13,9 +13,25 @@ npm install tessel-wifi-setup --save
 ```js
 var TesselWifiSetup = require('tessel-wifi-setup');
 
-TesselWifiSetup.start();
+var session = TesselWifiSetup.start();
 
-TesselWifiSetup.on('complete', function () {
-  console.log('Tessel is now connected to wifi!');
+session.on('complete', function (wirelessConfig) {
+  console.log('Tessel is now connected to the %s network', wirelessConfig.ssid);
+});
+
+session.on('cancel', function () {
+  console.log('The session was canceled, so the Tessel is not connected to wifi.');
+});
+
+// OR
+
+var TesselWifiSetup = require('tessel-wifi-setup');
+
+TesselWifiSetup.start(function (error, config) {
+  if (error) {
+    console.log('The user is not connected');
+  } else {
+    console.log('The session was canceled, so the Tessel is not connected to wifi.');
+  }
 });
 ```
