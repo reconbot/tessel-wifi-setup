@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node index.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "test": "standard"
+    "test": "standard && node tests/ | tap-spec"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,8 @@
   },
   "devDependencies": {
     "semantic-release": "^4.3.5",
-    "standard": "^7.1.2"
+    "standard": "^7.1.2",
+    "tap": "^5.7.2",
+    "tap-spec": "^4.1.1"
   }
 }
