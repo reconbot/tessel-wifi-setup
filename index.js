@@ -4,7 +4,7 @@ var http = require('http')
 var path = require('path')
 
 // server route setup
-var server = http.createServer((request, response) => {
+var serverSetup = function (request, response) {
   switch (request.url) {
     case '/':
       fs.readFile(path.join(__dirname, 'public', 'index.html'), (error, content) => {
@@ -41,18 +41,14 @@ var server = http.createServer((request, response) => {
     case '/stop-setup':
       response.writeHead(200, 'OK', { 'Content-Type': 'text/html' })
       response.end('Wifi setup complete. Server has stopped.')
-      server.close(() => console.log('Wifi setup complete. Server has stopped'))
+      this.close(() => console.log('Wifi setup complete. Server has stopped'))
       break
 
     default:
       handle404(response)
       break
   }
-})
-
-server.listen(process.argv[2] || 8080)
-
-console.log('Server running at %d', process.argv[2] || 8080)
+}
 
 // response functions
 
@@ -67,3 +63,23 @@ function handle404 (response) {
     response.end(content)
   })
 }
+
+var TesselWifiSetup = function () {
+  this.server = http.createServer(serverSetup)
+
+  Object.defineProperties(this, {
+    listening: {
+      get: () => !!this.server._handle // this is how `server.listening` works under the hood, which is added in v5.7.0 but Tessel runs 4.4.3 at the moment
+    }
+  })
+}
+
+TesselWifiSetup.prototype.start = function (port) {
+  return this.server.listen(port)
+}
+
+TesselWifiSetup.prototype.close = function (callback) {
+  this.server.close(callback)
+}
+
+module.exports = TesselWifiSetup
