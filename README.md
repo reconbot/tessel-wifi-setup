@@ -1,5 +1,7 @@
 # Tessel Wifi Setup [WIP]
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/reconbot/tessel-wifi-setup.svg)](https://greenkeeper.io/)
+
 This is (or will be) an NPM package to run inside a Tessel program for helping users connect Tessel to a local wifi network through a custom access point and web app. 
 
 ## Installation (once it's been published)
